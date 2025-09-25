@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div class="box has-text-centered">
+  <h2 class="title">Eliminar cuenta</h2>
+  <p>¿Seguro que quieres eliminar la cuenta de <strong>{{ user.username }}</strong>? Esta acción no se puede deshacer.</p>
+
+  <form method="post" style="margin-top: 1rem;">
+    {% csrf_token %}
+    <button type="submit" class="button is-danger">Sí, eliminar</button>
+    <a href="{% url 'dashboard' %}" class="button is-light">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

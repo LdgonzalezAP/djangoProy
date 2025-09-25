@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="title">Eliminar Video</h2>
+<p>¿Seguro que deseas eliminar <strong>{{ video.nombre }}.{{ video.extension }}</strong>?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="button is-danger">Sí, eliminar</button>
+  <a href="{% url 'list_videos' %}" class="button">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="title">Panel de usuario</h2>
+
+<div class="box">
+  <p class="subtitle">Bienvenido, <strong>{{ request.user.first_name }}</strong></p>
+  <p>Email: {{ request.user.email }}</p>
+  <p>Nombre: {{ request.user.first_name }} {{ request.user.last_name }}</p>
+</div>
+
+<div class="buttons">
+  <a href="{% url 'edit_user' request.user.id %}" class="button is-info">Editar perfil</a>
+  <a href="{% url 'delete_user' request.user.id %}" class="button is-danger">Eliminar cuenta</a>
+  
+</div>
+
+<hr>
+
+<div class="box">
+  <p class="subtitle">Mis Videos</p>
+
+  <a href="{% url 'upload_video' %}" class="button is-primary">Subir nuevo video</a>
+  <a href="{% url 'list_videos' %}" class="button is-link">Ver todos</a>
+
+  <table class="table is-fullwidth mt-3">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Extensión</th>
+        <th>Tamaño (MB)</th>
+        <th>Archivo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for video in videos %}
+        <tr>
+          <td>{{ video.nombre }}</td>
+          <td>{{ video.extension }}</td>
+          <td>{{ video.tamaño }}</td>
+          <td><a href="{{ video.archivo.url }}" target="_blank">Ver</a></td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">Todavía no has subido videos.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

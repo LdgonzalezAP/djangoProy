@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="title">Subir Video</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="button is-success">Guardar</button>
+  <a href="{% url 'list_videos' %}" class="button">Cancelar</a>
+</form>
+{% endblock %}

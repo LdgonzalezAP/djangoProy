@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="title">Mis Videos</h2>
+
+<a href="{% url 'upload_video' %}" class="button is-primary">Subir nuevo video</a>
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Extensión</th>
+      <th>Tamaño (MB)</th>
+      <th>Archivo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for video in videos %}
+      <tr>
+        <td>{{ video.nombre }}</td>
+        <td>{{ video.extension }}</td>
+        <td>{{ video.tamaño }}</td>
+        <td><a href="{{ video.archivo.url }}" target="_blank">Ver</a></td>
+        <td>
+          <a href="{% url 'delete_video' video.id %}" class="button is-danger is-small">Eliminar</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5">No tienes videos todavía.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
